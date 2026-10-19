@@ -1,0 +1,1390 @@
+<title>Guracha Family Tree</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@400;500;600&display=swap">
+
+<style>
+/* ── TOKENS ─────────────────────────────────────────────────────────── */
+:root {
+  --burg:       #641326;
+  --burg-mid:   #7d2035;
+  --burg-light: #9e3348;
+  --burg-faint: #f5eaed;
+  --gold:       #b8871e;
+  --gold-light: #d4a835;
+  --gold-pale:  #f7f0e0;
+  --cream:      #faf7f3;
+  --cream-dk:   #f0ebe1;
+  --ink:        #1a0a0e;
+  --ink-mid:    #4a2030;
+  --ink-soft:   #7a5060;
+  --border:     rgba(100,19,38,.14);
+  --card-bg:    #ffffff;
+  --overlay:    rgba(20,5,10,.55);
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-body:    'Inter', system-ui, sans-serif;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --burg:       #c0445a;
+    --burg-mid:   #a8304a;
+    --burg-light: #d4607a;
+    --burg-faint: #2a0d14;
+    --gold:       #d4a835;
+    --gold-light: #e8c060;
+    --gold-pale:  #1e1608;
+    --cream:      #120608;
+    --cream-dk:   #1e0c10;
+    --ink:        #f2e8ec;
+    --ink-mid:    #c8a0b0;
+    --ink-soft:   #a07888;
+    --border:     rgba(200,160,176,.14);
+    --card-bg:    #1e0c10;
+    --overlay:    rgba(0,0,0,.72);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --burg:       #c0445a;
+  --burg-mid:   #a8304a;
+  --burg-light: #d4607a;
+  --burg-faint: #2a0d14;
+  --gold:       #d4a835;
+  --gold-light: #e8c060;
+  --gold-pale:  #1e1608;
+  --cream:      #120608;
+  --cream-dk:   #1e0c10;
+  --ink:        #f2e8ec;
+  --ink-mid:    #c8a0b0;
+  --ink-soft:   #a07888;
+  --border:     rgba(200,160,176,.14);
+  --card-bg:    #1e0c10;
+  --overlay:    rgba(0,0,0,.72);
+  color-scheme: dark;
+}
+
+/* ── RESET ───────────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: var(--font-body);
+  font-size: 20px;
+  background: var(--cream);
+  color: var(--ink);
+  line-height: 1.6;
+  padding-left: max(0px, env(safe-area-inset-left, 0px));
+  padding-right: max(0px, env(safe-area-inset-right, 0px));
+  padding-block: 0;
+}
+
+/* ── HEADER ──────────────────────────────────────────────────────────── */
+.site-header {
+  background: var(--burg);
+  color: var(--cream);
+  text-align: center;
+  padding: 2.5rem max(1.5rem, env(safe-area-inset-left,0px)) 2rem;
+  position: relative;
+  overflow: hidden;
+}
+.site-header::after {
+  content:'';
+  position:absolute; inset:0;
+  background: radial-gradient(ellipse at 50% 110%, rgba(184,135,30,.2) 0%, transparent 65%);
+  pointer-events:none;
+}
+.site-header h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 8vw, 4rem);
+  font-weight: 700;
+  letter-spacing: .06em;
+  color: var(--gold-light);
+  position: relative;
+}
+.header-rule {
+  width: 100px; height: 1.5px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  margin: .9rem auto .7rem;
+  position: relative;
+}
+.site-header p {
+  font-size: clamp(1.1rem, 3vw, 1.35rem);
+  opacity: .82;
+  font-style: italic;
+  font-family: var(--font-display);
+  position: relative;
+}
+
+/* ── SEARCH BAR ───────────────────────────────────────────────────────── */
+.search-wrap {
+  background: var(--burg-mid);
+  padding: 1rem max(1.5rem, env(safe-area-inset-left,0px));
+  position: sticky;
+  top: env(safe-area-inset-top, 0px);
+  z-index: 50;
+  border-bottom: 2px solid var(--gold);
+}
+body::before {
+  content:''; position:fixed; inset:0 0 auto;
+  height: env(safe-area-inset-top, 0px);
+  background: var(--burg-mid);
+  z-index: 51;
+}
+.search-inner {
+  max-width: 760px;
+  margin: 0 auto;
+  display: flex; gap: .5rem;
+}
+.search-inner input {
+  flex: 1;
+  border: none;
+  border-radius: 6px;
+  padding: .8rem 1.1rem;
+  font-size: 1.15rem;
+  font-family: var(--font-body);
+  background: var(--cream);
+  color: var(--ink);
+  outline: 2px solid transparent;
+  transition: outline .15s;
+}
+.search-inner input:focus { outline-color: var(--gold); }
+.search-inner input::placeholder { color: var(--ink-soft); }
+.search-inner button {
+  background: var(--gold);
+  color: #1a0a0e;
+  border: none;
+  border-radius: 6px;
+  padding: .8rem 1.3rem;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 1.1rem;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background .15s;
+}
+.search-inner button:hover { background: var(--gold-light); }
+
+/* ── SEARCH RESULTS PANEL ─────────────────────────────────────────────── */
+#results-panel {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: var(--overlay);
+  padding: max(4rem, calc(env(safe-area-inset-top,0px) + 3.5rem)) max(16px, env(safe-area-inset-left,0px)) max(1rem, env(safe-area-inset-bottom,0px));
+  overflow-y: auto;
+}
+#results-panel.open { display: block; }
+.results-box {
+  background: var(--card-bg);
+  border-radius: 10px;
+  max-width: 720px;
+  margin: 0 auto;
+  overflow: hidden;
+  box-shadow: 0 8px 40px rgba(0,0,0,.35);
+}
+.results-header {
+  background: var(--burg);
+  color: var(--gold-light);
+  padding: 1rem 1.4rem;
+  display: flex; align-items: center; justify-content: space-between;
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 600;
+}
+.results-header button {
+  background: none; border: none;
+  color: var(--gold-light); font-size: 1.4rem;
+  cursor: pointer; line-height: 1; padding: 0 .2rem;
+}
+.results-list { padding: .5rem 0; max-height: 65vh; overflow-y: auto; }
+.result-item {
+  display: flex; align-items: center; gap: .8rem;
+  padding: .7rem 1.4rem;
+  cursor: pointer;
+  border-bottom: 1px solid var(--border);
+  transition: background .12s;
+}
+.result-item:last-child { border-bottom: none; }
+.result-item:hover { background: var(--burg-faint); }
+.result-avatar {
+  width: 40px; height: 40px; border-radius: 50%;
+  background: var(--burg-faint);
+  border: 2px solid var(--gold);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.1rem; flex-shrink: 0;
+  color: var(--burg);
+}
+.result-info { min-width: 0; }
+.result-name {
+  font-weight: 600; font-size: 1.2rem;
+  color: var(--burg);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.result-name mark { background: rgba(184,135,30,.35); border-radius: 2px; color: inherit; }
+.result-meta { font-size: 1rem; color: var(--ink-soft); }
+.no-results {
+  padding: 2rem 1.4rem;
+  text-align: center;
+  color: var(--ink-soft);
+  font-style: italic;
+}
+
+/* ── PROFILE MODAL ────────────────────────────────────────────────────── */
+#profile-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  background: var(--overlay);
+  padding: max(3rem, calc(env(safe-area-inset-top,0px) + 2.5rem)) max(16px, env(safe-area-inset-left,0px)) max(1rem, env(safe-area-inset-bottom,0px));
+  overflow-y: auto;
+}
+#profile-modal.open { display: block; }
+.profile-card {
+  background: var(--card-bg);
+  border-radius: 12px;
+  max-width: 680px;
+  margin: 0 auto;
+  overflow: hidden;
+  box-shadow: 0 12px 50px rgba(0,0,0,.4);
+}
+.profile-banner {
+  background: linear-gradient(135deg, var(--burg) 0%, #3a0a12 100%);
+  padding: 1.8rem 1.5rem 1rem;
+  display: flex; align-items: flex-start; gap: 1.2rem;
+  position: relative;
+}
+.profile-banner::after {
+  content:''; position:absolute; inset:0;
+  background: radial-gradient(ellipse at 80% 120%, rgba(184,135,30,.18) 0%, transparent 60%);
+  pointer-events:none;
+}
+.profile-photo {
+  width: 88px; height: 88px;
+  border-radius: 50%;
+  border: 3px solid var(--gold);
+  background: var(--burg-mid);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 2.4rem;
+  flex-shrink: 0;
+  position: relative; z-index: 1;
+  overflow: hidden;
+}
+.profile-photo img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
+.profile-headline { position: relative; z-index: 1; min-width: 0; }
+.profile-name {
+  font-family: var(--font-display);
+  font-size: clamp(1.7rem, 5vw, 2.2rem);
+  font-weight: 700;
+  color: var(--gold-light);
+  line-height: 1.2;
+  text-wrap: balance;
+}
+.profile-gen {
+  display: inline-block;
+  background: rgba(184,135,30,.25);
+  color: var(--gold-light);
+  font-size: .9rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  padding: .22rem .65rem;
+  border-radius: 20px;
+  margin-top: .35rem;
+}
+.profile-status {
+  font-size: 1rem;
+  color: rgba(250,247,243,.65);
+  margin-top: .3rem;
+  font-style: italic;
+}
+.profile-close {
+  position: absolute; top: .8rem; right: .9rem; z-index: 2;
+  background: rgba(250,247,243,.12);
+  border: none;
+  color: var(--gold-light);
+  width: 30px; height: 30px;
+  border-radius: 50%;
+  font-size: 1.1rem;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: background .15s;
+}
+.profile-close:hover { background: rgba(250,247,243,.25); }
+.profile-body { padding: 1.2rem 1.5rem 1.5rem; }
+.profile-section { margin-bottom: 1.2rem; }
+.profile-section:last-child { margin-bottom: 0; }
+.psec-label {
+  font-size: 1rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 600;
+  margin-bottom: .45rem;
+  display: flex; align-items: center; gap: .4rem;
+}
+.psec-label::after {
+  content:''; flex:1; height:1px;
+  background: linear-gradient(90deg, var(--border), transparent);
+}
+.psec-value {
+  font-size: 1.15rem;
+  color: var(--ink);
+  line-height: 1.55;
+}
+.psec-value a {
+  color: var(--burg);
+  text-decoration: none;
+  font-weight: 500;
+  cursor: pointer;
+}
+.psec-value a:hover { text-decoration: underline; }
+.family-chips {
+  display: flex; flex-wrap: wrap; gap: .4rem;
+  margin-top: .3rem;
+}
+.chip {
+  background: var(--burg-faint);
+  color: var(--burg);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: .38rem 1rem;
+  font-size: 1.05rem;
+  cursor: pointer;
+  transition: background .12s, color .12s;
+  font-family: var(--font-body);
+  white-space: nowrap;
+}
+.chip:hover { background: var(--burg); color: var(--cream); }
+.chip.gold { background: var(--gold-pale); color: var(--gold); border-color: rgba(184,135,30,.3); }
+.chip.gold:hover { background: var(--gold); color: #1a0a0e; }
+.note-box {
+  background: var(--gold-pale);
+  border-left: 3px solid var(--gold);
+  border-radius: 0 4px 4px 0;
+  padding: .65rem .9rem;
+  font-size: .95rem;
+  font-style: italic;
+  color: var(--ink-mid);
+  margin-top: .5rem;
+}
+
+/* ── MAIN CONTENT ─────────────────────────────────────────────────────── */
+main {
+  max-width: 1060px;
+  margin: 0 auto;
+  padding: 2rem max(1.2rem, env(safe-area-inset-left,0px)) 4rem;
+}
+
+/* ── INTRO ────────────────────────────────────────────────────────────── */
+.intro {
+  background: var(--burg);
+  color: var(--cream);
+  border-radius: 10px;
+  padding: 1.8rem 2rem;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+.intro-quote {
+  font-family: var(--font-display);
+  font-size: clamp(1.3rem, 4vw, 1.6rem);
+  font-style: italic;
+  color: var(--gold-light);
+  line-height: 1.7;
+}
+.intro p { font-size: 1.15rem; opacity: .82; margin-top: .6rem; }
+
+/* ── STATS ────────────────────────────────────────────────────────────── */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(110px,1fr));
+  gap: .8rem;
+  margin-bottom: 2rem;
+}
+.stat {
+  background: var(--card-bg);
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  border-bottom: 3px solid var(--gold);
+  text-align: center;
+  padding: 1rem .6rem;
+}
+.stat-n {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem,4vw,2rem);
+  font-weight: 700;
+  color: var(--burg);
+  display: block;
+  font-variant-numeric: tabular-nums;
+}
+.stat-l { font-size: 1rem; color: var(--ink-soft); letter-spacing: .05em; }
+
+/* ── NAV TABS ─────────────────────────────────────────────────────────── */
+.tabs {
+  display: flex; flex-wrap: wrap; gap: .35rem;
+  margin-bottom: 1.5rem;
+}
+.tab-btn {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: .55rem 1.1rem;
+  font-size: 1.05rem;
+  font-family: var(--font-body);
+  color: var(--ink-mid);
+  cursor: pointer;
+  transition: all .15s;
+  white-space: nowrap;
+}
+.tab-btn:hover { border-color: var(--burg); color: var(--burg); }
+.tab-btn.active {
+  background: var(--burg);
+  color: var(--gold-light);
+  border-color: var(--burg);
+  font-weight: 600;
+}
+
+/* ── TREE SECTION ─────────────────────────────────────────────────────── */
+.tree-section { display: none; }
+.tree-section.active { display: block; }
+.section-heading {
+  font-family: var(--font-display);
+  font-size: clamp(1.2rem, 3vw, 1.6rem);
+  font-weight: 700;
+  color: var(--burg);
+  margin-bottom: 1.2rem;
+  padding-bottom: .5rem;
+  border-bottom: 2px solid var(--gold);
+}
+
+/* ── PERSON CARDS GRID ────────────────────────────────────────────────── */
+.persons-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: .8rem;
+  margin-bottom: 1.5rem;
+}
+.person-tile {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: .9rem;
+  cursor: pointer;
+  transition: box-shadow .15s, border-color .15s, transform .12s;
+  display: flex; flex-direction: column; gap: .3rem;
+}
+.person-tile:hover {
+  border-color: var(--burg);
+  box-shadow: 0 4px 16px rgba(100,19,38,.12);
+  transform: translateY(-1px);
+}
+.person-tile.deceased { opacity: .72; border-style: dashed; }
+.pt-avatar {
+  width: 44px; height: 44px; border-radius: 50%;
+  background: var(--burg-faint);
+  border: 2px solid var(--gold);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.3rem; margin-bottom: .1rem;
+  overflow: hidden;
+}
+.pt-avatar img { width:100%;height:100%;object-fit:cover;border-radius:50%; }
+.pt-name {
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--burg);
+  line-height: 1.3;
+}
+.pt-role { font-size: .82rem; color: var(--ink-soft); font-style: italic; }
+.pt-tag {
+  display: inline-block;
+  background: var(--burg-faint);
+  color: var(--burg);
+  font-size: .78rem;
+  padding: .1rem .42rem;
+  border-radius: 10px;
+  margin-top: .1rem;
+  width: fit-content;
+}
+.pt-tag.dec { background: rgba(120,120,120,.1); color: #888; }
+
+/* ── FAMILY GROUP ─────────────────────────────────────────────────────── */
+.family-group {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  margin-bottom: 1.2rem;
+  overflow: hidden;
+}
+.fg-header {
+  background: linear-gradient(90deg, var(--burg) 0%, var(--burg-mid) 100%);
+  color: var(--gold-light);
+  padding: .75rem 1.2rem;
+  display: flex; align-items: center; gap: .7rem;
+  cursor: pointer;
+  user-select: none;
+}
+.fg-header h3 {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 600;
+  flex: 1;
+}
+.fg-chevron { transition: transform .25s; font-size: .9rem; }
+.fg-header.open .fg-chevron { transform: rotate(180deg); }
+.fg-body { padding: 1rem 1.2rem; display: none; }
+.fg-body.open { display: block; }
+
+/* ── WIFE STRIP ───────────────────────────────────────────────────────── */
+.wife-strip {
+  border-top: 1px solid var(--border);
+  padding-top: .8rem;
+  margin-top: .8rem;
+}
+.wife-strip:first-child { border-top: none; padding-top: 0; margin-top: 0; }
+.wife-label {
+  font-size: .8rem; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--gold); font-weight: 600; margin-bottom: .3rem;
+}
+.wife-name { font-weight: 600; color: var(--burg); font-size: 1.05rem; margin-bottom: .5rem; }
+
+/* ── CHILDREN LIST ────────────────────────────────────────────────────── */
+.children-list { list-style: none; padding: 0; }
+.children-list li {
+  display: flex; align-items: center; gap: .5rem;
+  padding: .35rem 0;
+  font-size: 1rem;
+  border-bottom: 1px dashed var(--border);
+}
+.children-list li:last-child { border-bottom: none; }
+.children-list li.dec { color: var(--ink-soft); font-style: italic; }
+.children-list li.dec::after { content: ' †'; color: #aaa; }
+.cl-num {
+  font-size: .82rem; color: var(--ink-soft);
+  font-variant-numeric: tabular-nums;
+  min-width: 1.2rem;
+}
+.cl-link {
+  color: var(--burg); text-decoration: none; font-weight: 500; cursor: pointer;
+}
+.cl-link:hover { text-decoration: underline; }
+
+/* ── FOOTER ───────────────────────────────────────────────────────────── */
+footer {
+  background: var(--burg);
+  color: rgba(250,247,243,.65);
+  text-align: center;
+  padding: 2rem max(1rem, env(safe-area-inset-left,0px));
+  font-size: .8rem;
+}
+footer strong { color: var(--gold-light); }
+
+/* ── RESPONSIVE ───────────────────────────────────────────────────────── */
+@media (max-width: 520px) {
+  .persons-grid { grid-template-columns: 1fr 1fr; }
+  .profile-banner { flex-direction: column; }
+  .profile-photo { width: 68px; height: 68px; font-size: 1.8rem; }
+}
+@media (max-width: 360px) {
+  .persons-grid { grid-template-columns: 1fr; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .person-tile { transition: none; }
+  .fg-chevron { transition: none; }
+}
+</style>
+
+<!-- ══════════════ HEADER ══════════════ -->
+<header class="site-header">
+  <h1>The Legacy of Guracha</h1>
+  <div class="header-rule"></div>
+  <p>Family Tree of Abio Gafo (Guracha) — Four Generations</p>
+</header>
+
+<!-- ══════════════ SEARCH ══════════════ -->
+<div class="search-wrap">
+  <div class="search-inner">
+    <input type="text" id="q" placeholder="Search any family member by name…" autocomplete="off" aria-label="Search family members">
+    <button onclick="runSearch()">Search</button>
+  </div>
+</div>
+
+<!-- ══════════════ SEARCH RESULTS PANEL ══════════════ -->
+<div id="results-panel" role="dialog" aria-modal="true" aria-label="Search results">
+  <div class="results-box">
+    <div class="results-header">
+      <span id="results-title">Results</span>
+      <button onclick="closeResults()" aria-label="Close">✕</button>
+    </div>
+    <div class="results-list" id="results-list"></div>
+  </div>
+</div>
+
+<!-- ══════════════ PROFILE MODAL ══════════════ -->
+<div id="profile-modal" role="dialog" aria-modal="true" aria-label="Family member profile">
+  <div class="profile-card">
+    <div class="profile-banner">
+      <div class="profile-photo" id="pm-photo">👤</div>
+      <div class="profile-headline">
+        <div class="profile-name" id="pm-name"></div>
+        <div class="profile-gen" id="pm-gen"></div>
+        <div class="profile-status" id="pm-status"></div>
+      </div>
+      <button class="profile-close" onclick="closeProfile()" aria-label="Close profile">✕</button>
+    </div>
+    <div class="profile-body" id="pm-body"></div>
+  </div>
+</div>
+
+<!-- ══════════════ MAIN ══════════════ -->
+<main>
+
+  <div class="intro">
+    <div class="intro-quote">"From Gafo Abio came Guracha. From Guracha came generations."</div>
+    <p>Guracha passed away in 1971 and was laid to rest in Mombasa. His legacy lives on through four generations of descendants. Search any name above or browse below.</p>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><span class="stat-n">4</span><span class="stat-l">Wives</span></div>
+    <div class="stat"><span class="stat-n">13+</span><span class="stat-l">Children</span></div>
+    <div class="stat"><span class="stat-n">60+</span><span class="stat-l">Grandchildren</span></div>
+    <div class="stat"><span class="stat-n">4</span><span class="stat-l">Generations</span></div>
+    <div class="stat"><span class="stat-n">1971</span><span class="stat-l">Year of Passing</span></div>
+    <div class="stat"><span class="stat-n">Mombasa</span><span class="stat-l">Resting Place</span></div>
+  </div>
+
+  <!-- TABS -->
+  <div class="tabs" id="tabs">
+    <button class="tab-btn active" onclick="showTab('overview',this)">Overview</button>
+    <button class="tab-btn" onclick="showTab('roots',this)">The Roots</button>
+    <button class="tab-btn" onclick="showTab('wife1',this)">Wife I — Mama Kapune</button>
+    <button class="tab-btn" onclick="showTab('wife2',this)">Wife II — Mama Maita</button>
+    <button class="tab-btn" onclick="showTab('wife4',this)">Wife IV — Selita Mkyagawa</button>
+    <button class="tab-btn" onclick="showTab('vittukuu',this)">Vittukuu</button>
+    <button class="tab-btn" onclick="showTab('raised',this)">Raised by Guracha</button>
+  </div>
+
+  <!-- ─── OVERVIEW ─── -->
+  <section class="tree-section active" id="sec-overview">
+    <h2 class="section-heading">Guracha — Patriarch of the Family</h2>
+    <div class="family-group">
+      <div class="fg-header open" onclick="fgToggle(this)">
+        <h3>Abio Gafo (Guracha) — Four Wives</h3>
+        <span class="fg-chevron">▾</span>
+      </div>
+      <div class="fg-body open">
+        <p style="font-size:.88rem;margin-bottom:1rem;color:var(--ink-mid)">Guracha did not practice polygamy. Each marriage occurred after the previous had ended. He was laid to rest in Mombasa in 1971.</p>
+        <div class="wife-strip">
+          <div class="wife-label">First Wife</div>
+          <div class="wife-name">Mama Kapune</div>
+          <ul class="children-list"><li><span class="cl-num">1.</span><span class="cl-link" onclick="openProfile('haduyo_abio_snr')">Haduyo Abio Snr</span></li></ul>
+        </div>
+        <div class="wife-strip">
+          <div class="wife-label">Second Wife</div>
+          <div class="wife-name">Mama Maita</div>
+          <ul class="children-list"><li><span class="cl-num">1.</span><span class="cl-link" onclick="openProfile('gafo_abio_snr')">Gafo Abio</span></li></ul>
+        </div>
+        <div class="wife-strip">
+          <div class="wife-label">Third Wife</div>
+          <div class="wife-name">Mama Hankima</div>
+          <ul class="children-list"><li class="dec"><span class="cl-num">1.</span>Eliya (Eli) — died in infancy</li></ul>
+        </div>
+        <div class="wife-strip">
+          <div class="wife-label">Fourth Wife</div>
+          <div class="wife-name">Selita Mkyagawa</div>
+          <ul class="children-list">
+            <li><span class="cl-num">1.</span><span class="cl-link" onclick="openProfile('rebecca')">Rebecca Haduyo Abio</span></li>
+            <li><span class="cl-num">2.</span><span class="cl-link" onclick="openProfile('suleiman')">Suleiman Hiribae Abio</span></li>
+            <li><span class="cl-num">3.</span><span class="cl-link" onclick="openProfile('moses_galana_abio')">Moses Galana Abio</span></li>
+            <li><span class="cl-num">4.</span><span class="cl-link" onclick="openProfile('phillip_jillo')">Phillip Jillo Abio</span></li>
+            <li class="dec"><span class="cl-num">5.</span>Gafo Abio — deceased in infancy</li>
+            <li class="dec"><span class="cl-num">6.</span>Hadia Abio — deceased in infancy</li>
+            <li><span class="cl-num">7.</span><span class="cl-link" onclick="openProfile('harrison_morowa')">Harrison Phillip Morowa Abio</span></li>
+            <li><span class="cl-num">8.</span><span class="cl-link" onclick="openProfile('patrick_gafo')">Patrick Gafo Abio</span></li>
+            <li class="dec"><span class="cl-num">9.</span><span class="cl-link" onclick="openProfile('naomi_hadia')">Naomi Hadia Abio</span> — passed away after childbirth</li>
+            <li><span class="cl-num">10.</span><span class="cl-link" onclick="openProfile('dhadho_abio')">Dhadho Abio</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <p style="font-size:.85rem;color:var(--ink-soft);font-style:italic">Guracha also raised two children of his siblings: <span class="cl-link" onclick="openProfile('gafo_jillo')">Gafo Jillo (Nehemia)</span> and <span class="cl-link" onclick="openProfile('haduyo_galana_rebecca')">Haduyo Galana (Rebecca)</span>.</p>
+  </section>
+
+  <!-- ─── ROOTS ─── -->
+  <section class="tree-section" id="sec-roots">
+    <h2 class="section-heading">The Roots Before Guracha — Gafo Abio</h2>
+    <div class="family-group">
+      <div class="fg-header open" onclick="fgToggle(this)">
+        <h3>Gafo Abio — Father of Guracha</h3><span class="fg-chevron">▾</span>
+      </div>
+      <div class="fg-body open">
+        <div class="wife-strip">
+          <div class="wife-label">First Wife — Haduyo</div>
+          <ul class="children-list">
+            <li><span class="cl-num">1.</span><span class="cl-link" onclick="openProfile('guracha')">Abio Gafo (Guracha)</span></li>
+            <li><span class="cl-num">2.</span>Jillo Gafo</li>
+            <li><span class="cl-num">3.</span>Galana Gafo</li>
+            <li><span class="cl-num">4.</span>Mbuya Gafo (Hafua)</li>
+            <li><span class="cl-num">5.</span>Hawadesa Gafo</li>
+          </ul>
+        </div>
+        <div class="wife-strip">
+          <div class="wife-label">Second Wife — Rumbe Kofa</div>
+          <ul class="children-list">
+            <li><span class="cl-num">1.</span>Hadia Gafo</li>
+          </ul>
+          <p style="font-size:.82rem;margin-top:.4rem;color:var(--ink-soft)">Hadia Gafo's children: Brown, Naomi, Ghamachana, Rumbe, Joseph</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── WIFE I ─── -->
+  <section class="tree-section" id="sec-wife1">
+    <h2 class="section-heading">Wife I — Mama Kapune → Haduyo Abio Snr</h2>
+    <div class="family-group">
+      <div class="fg-header open" onclick="fgToggle(this)">
+        <h3>Haduyo Abio Snr — 6 Children</h3><span class="fg-chevron">▾</span>
+      </div>
+      <div class="fg-body open">
+        <ul class="children-list">
+          <li><span class="cl-num">1.</span><span class="cl-link" onclick="openProfile('halubha_ddima')">Halubha Ddima</span></li>
+          <li class="dec"><span class="cl-num">2.</span>Hiribae Ddima</li>
+          <li class="dec"><span class="cl-num">3.</span>Chunjulu Ddima</li>
+          <li><span class="cl-num">4.</span><span class="cl-link" onclick="openProfile('galole_ddima')">Galole Ddima</span></li>
+          <li><span class="cl-num">5.</span><span class="cl-link" onclick="openProfile('guyato_ddima')">Guyato Ddima</span></li>
+          <li><span class="cl-num">6.</span><span class="cl-link" onclick="openProfile('ghamachana_ddima')">Ghamachana Ddima</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── WIFE II ─── -->
+  <section class="tree-section" id="sec-wife2">
+    <h2 class="section-heading">Wife II — Mama Maita → Gafo Abio × Sarah</h2>
+    <div class="family-group">
+      <div class="fg-header open" onclick="fgToggle(this)">
+        <h3>Gafo Abio × Sarah — 8 Children</h3><span class="fg-chevron">▾</span>
+      </div>
+      <div class="fg-body open">
+        <ul class="children-list">
+          <li><span class="cl-num">1.</span><span class="cl-link" onclick="openProfile('abio_philip_gafo')">Abio Philip Gafo</span></li>
+          <li><span class="cl-num">2.</span><span class="cl-link" onclick="openProfile('haduyo_selina_gafo')">Haduyo Selina Gafo</span></li>
+          <li class="dec"><span class="cl-num">3.</span><span class="cl-link" onclick="openProfile('hadia_mary_gafo')">Hadia Mary Gafo</span></li>
+          <li><span class="cl-num">4.</span><span class="cl-link" onclick="openProfile('yesse_maddawa')">Yesse Maddawa Gafo (Jillo Gafo)</span></li>
+          <li><span class="cl-num">5.</span><span class="cl-link" onclick="openProfile('rose_hawadesa_gafo')">Rose Hawadesa Gafo</span></li>
+          <li><span class="cl-num">6.</span><span class="cl-link" onclick="openProfile('subira_hadima')">Subira Hadima Gafo</span></li>
+          <li><span class="cl-num">7.</span><span class="cl-link" onclick="openProfile('moses_galana_gafo')">Moses Galana Gafo</span></li>
+          <li><span class="cl-num">8.</span><span class="cl-link" onclick="openProfile('hiribae_suleiman_gafo')">Hiribae Suleiman Gafo</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── WIFE IV ─── -->
+  <section class="tree-section" id="sec-wife4">
+    <h2 class="section-heading">Wife IV — Selita Mkyagawa — 10 Children</h2>
+    <div class="persons-grid" id="selita-grid"></div>
+  </section>
+
+  <!-- ─── VITTUKUU ─── -->
+  <section class="tree-section" id="sec-vittukuu">
+    <h2 class="section-heading">Vittukuu — Great-Grandchildren of Guracha</h2>
+    <div class="tabs" style="margin-bottom:1rem">
+      <button class="tab-btn active" onclick="showVTab('vm',this)">Via Mama Maita</button>
+      <button class="tab-btn" onclick="showVTab('vr',this)">Via Rebecca</button>
+      <button class="tab-btn" onclick="showVTab('vs',this)">Via Suleiman</button>
+      <button class="tab-btn" onclick="showVTab('vmg',this)">Via Moses Galana</button>
+      <button class="tab-btn" onclick="showVTab('vp',this)">Via Phillip Jillo</button>
+      <button class="tab-btn" onclick="showVTab('vh',this)">Via Harrison</button>
+      <button class="tab-btn" onclick="showVTab('vpg',this)">Via Patrick</button>
+      <button class="tab-btn" onclick="showVTab('vd',this)">Via Dhadho</button>
+    </div>
+    <div id="vtab-vm" class="vtab active"></div>
+    <div id="vtab-vr" class="vtab" style="display:none"></div>
+    <div id="vtab-vs" class="vtab" style="display:none"></div>
+    <div id="vtab-vmg" class="vtab" style="display:none"></div>
+    <div id="vtab-vp" class="vtab" style="display:none"></div>
+    <div id="vtab-vh" class="vtab" style="display:none"></div>
+    <div id="vtab-vpg" class="vtab" style="display:none"></div>
+    <div id="vtab-vd" class="vtab" style="display:none"></div>
+  </section>
+
+  <!-- ─── RAISED ─── -->
+  <section class="tree-section" id="sec-raised">
+    <h2 class="section-heading">Children Raised by Guracha</h2>
+    <p style="font-size:.88rem;color:var(--ink-mid);margin-bottom:1.2rem">Some of Guracha's siblings passed away while their children were young. Guracha took them in and raised them as his own.</p>
+    <div class="persons-grid" id="raised-grid"></div>
+  </section>
+
+</main>
+
+<footer>
+  <p><strong>The Legacy of Guracha</strong> — Family Documentary</p>
+  <p style="margin-top:.4rem">Abio Gafo (Guracha) · 1971 · Mombasa</p>
+  <p style="margin-top:.8rem;font-size:.72rem;opacity:.6">"As long as future generations remember their roots, the name Guracha shall never be forgotten."</p>
+</footer>
+
+<script>
+/* ═══════════════════════════════════════════════════════════════════════
+   FAMILY DATA — every person is a node with full connections
+   ═══════════════════════════════════════════════════════════════════════ */
+const PEOPLE = {
+
+  guracha: {
+    id:'guracha', name:'Abio Gafo (Guracha)', emoji:'👴',
+    gen:'Generation 0 — Patriarch', status:'Passed away 1971, Mombasa',
+    parents:[], spouses:['Mama Kapune','Mama Maita','Mama Hankima','Selita Mkyagawa'],
+    children:['haduyo_abio_snr','gafo_abio_snr','rebecca','suleiman','moses_galana_abio','phillip_jillo','harrison_morowa','patrick_gafo','naomi_hadia','dhadho_abio'],
+    notes:'Did not practice polygamy — each marriage occurred after the previous had ended. He also raised Gafo Jillo (Nehemia) and Haduyo Galana (Rebecca), children of his siblings.',
+    branch:'Patriarch'
+  },
+
+  /* ── WIFE I LINE ── */
+  haduyo_abio_snr: {
+    id:'haduyo_abio_snr', name:'Haduyo Abio Snr', emoji:'👩',
+    gen:'Generation 1 — Child of Mama Kapune',
+    parents:['guracha','Mama Kapune'],
+    spouses:[], children:['halubha_ddima','hiribae_ddima','chunjulu_ddima','galole_ddima','guyato_ddima','ghamachana_ddima'],
+    branch:'Wife I'
+  },
+  halubha_ddima: {
+    id:'halubha_ddima', name:'Halubha Ddima', emoji:'👤',
+    gen:'Generation 2 — Grandchild of Guracha',
+    parents:['haduyo_abio_snr'], spouses:['Ade Doyo'],
+    children_text:['Selina Nkandugu','Elia Doyo','David Maro','Rahab Ghamaloku','Joyce Diramo','Dorice Guyato','Elisha Mkofira','Philip Kofa'],
+    branch:'Wife I'
+  },
+  hiribae_ddima: {
+    id:'hiribae_ddima', name:'Hiribae Ddima', emoji:'👤', deceased:true,
+    gen:'Generation 2 — Grandchild of Guracha',
+    parents:['haduyo_abio_snr'], spouses:[],
+    children_text:['Haduyo','Galole','Ddima'],
+    branch:'Wife I'
+  },
+  chunjulu_ddima: {
+    id:'chunjulu_ddima', name:'Chunjulu Ddima', emoji:'👤', deceased:true,
+    gen:'Generation 2 — Grandchild of Guracha',
+    parents:['haduyo_abio_snr'], spouses:[],
+    children_text:['Hashora','Jamila'],
+    branch:'Wife I'
+  },
+  galole_ddima: {
+    id:'galole_ddima', name:'Galole Ddima', emoji:'👤',
+    gen:'Generation 2 — Grandchild of Guracha',
+    parents:['haduyo_abio_snr'], spouses:['Ms. Eunice'],
+    children_text:['Ddima','Hiribae','Haduyo †','Hamesa','Halubha','Chunjulu'],
+    branch:'Wife I'
+  },
+  guyato_ddima: {
+    id:'guyato_ddima', name:'Guyato Ddima', emoji:'👤',
+    gen:'Generation 2 — Grandchild of Guracha',
+    parents:['haduyo_abio_snr'], spouses:[],
+    children_text:['Rhoka','Joyce','Dirivo','Komora','Koshi','Gamashuru','Diramo'],
+    branch:'Wife I'
+  },
+  ghamachana_ddima: {
+    id:'ghamachana_ddima', name:'Ghamachana Ddima', emoji:'👤',
+    gen:'Generation 2 — Grandchild of Guracha',
+    parents:['haduyo_abio_snr'], spouses:[],
+    children_text:['Mayaa','Makorani','Dhadho'],
+    branch:'Wife I'
+  },
+
+  /* ── WIFE II LINE ── */
+  gafo_abio_snr: {
+    id:'gafo_abio_snr', name:'Gafo Abio', emoji:'👤',
+    gen:'Generation 1 — Child of Mama Maita',
+    parents:['guracha','Mama Maita'], spouses:['Sarah'],
+    children:['abio_philip_gafo','haduyo_selina_gafo','hadia_mary_gafo','yesse_maddawa','rose_hawadesa_gafo','subira_hadima','moses_galana_gafo','hiribae_suleiman_gafo'],
+    notes:'Mama Maita left the marriage voluntarily after his birth.',
+    branch:'Wife II'
+  },
+  abio_philip_gafo: {
+    id:'abio_philip_gafo', name:'Abio Philip Gafo', emoji:'👤',
+    gen:'Generation 2 — Grandchild of Guracha',
+    parents:['gafo_abio_snr','Sarah'], spouses:['Monica Luwa'],
+    children_text:['David Gafo Abio (Dedee)','Bwoe Jillo Abio †','Sarah Hambirhe Abio','Moses Galana Abio','Harrison Morowa Abio','Selina Hadduyo Abio','Mary Hadia Abio'],
+    branch:'Wife II'
+  },
+  haduyo_selina_gafo: {
+    id:'haduyo_selina_gafo', name:'Haduyo Selina Gafo', emoji:'👩',
+    gen:'Generation 2 — Grandchild of Guracha',
+    parents:['gafo_abio_snr','Sarah'], spouses:['Isaya Kokani'],
+    children_text:['Juliana Hakofa Kokani','Sylvia Hadima Isaya','Rose Mkyagawa Kokani','Obed Bajila Isaya','Agnes Bona Isaya','Consolata Hadia Kokani'],
+    branch:'Wife II'
+  },
+  hadia_mary_gafo: {
+    id:'hadia_mary_gafo', name:'Hadia Mary Gafo', emoji:'👩', deceased:true,
+    gen:'Generation 2 — Grandchild of Guracha',
+    parents:['gafo_abio_snr','Sarah'], spouses:['Lameck Kofa (LK)'],
+    children_text:['Blandina Habwoya Kofa','Jesper Malika Kofa','Zakaria Bonaya Kofa (ZB)'],
+    branch:'Wife II'
+  },
+  yesse_maddawa: {
+    id:'yesse_maddawa', name:'Yesse Maddawa Gafo (Jillo Gafo)', emoji:'👤',
+    gen:'Generation 2 — Grandchild of Guracha',
+    parents:['gafo_abio_snr','Sarah'], spouses:['Esther Bahola'],
+    children_text:['Sara Hambirhe Maddawa','David Gafo Maddawa (Dedee)','Philip Abio Maddawa','Mercy Hadduyo Maddawa','Rose Hawadesa Maddawa','Moses Galana Maddawa (Babusa)'],
+    branch:'Wife II'
+  },
+  rose_hawadesa_gafo: {
+    id:'rose_hawadesa_gafo', name:'Rose Hawadesa Gafo', emoji:'👩',
+    gen:'Generation 2 — Grandchild of Guracha',
+    parents:['gafo_abio_snr','Sarah'], spouses:[],
+    children_text:['Winnie Wande','Gafo Babusa (Priston)'],
+    branch:'Wife II'
+  },
+  subira_hadima: {
+    id:'subira_hadima', name:'Subira Hadima Gafo', emoji:'👩',
+    gen:'Generation 2 — Grandchild of Guracha',
+    parents:['gafo_abio_snr','Sarah'], spouses:['Julius Buya'],
+    children_text:['Johnson Jillo Buya','Joy Mkyanddera Buya','Rachel Hadhidha Buya','Michael Yaro Buya (Mike)'],
+    branch:'Wife II'
+  },
+  moses_galana_gafo: {
+    id:'moses_galana_gafo', name:'Moses Galana Gafo', emoji:'👤',
+    gen:'Generation 2 — Grandchild of Guracha',
+    parents:['gafo_abio_snr','Sarah'], spouses:['Maneno Gayoye'],
+    children_text:['David Gafo Galana','Sarah Hambirhe Galana','Haddima Subira Galana'],
+    branch:'Wife II'
+  },
+  hiribae_suleiman_gafo: {
+    id:'hiribae_suleiman_gafo', name:'Hiribae Suleiman Gafo', emoji:'👤',
+    gen:'Generation 2 — Grandchild of Guracha',
+    parents:['gafo_abio_snr','Sarah'], spouses:['Melvin Dhadho'],
+    children_text:['Princess Hambirhe Hiribae','Precious Maitta Hiribae'],
+    branch:'Wife II'
+  },
+
+  /* ── WIFE IV — SELITA CHILDREN ── */
+  rebecca: {
+    id:'rebecca', name:'Rebecca Haduyo Abio', emoji:'👩',
+    gen:'Generation 1 — 1st Child of Selita Mkyagawa',
+    parents:['guracha','Selita Mkyagawa'], spouses:[],
+    children:['shirikisho','hawadesa_r','hiribae_r','hadia_r','jillo_r','bajebi_r','babo_r','hakofa_r','habokea_r'],
+    branch:'Wife IV'
+  },
+  suleiman: {
+    id:'suleiman', name:'Suleiman Hiribae Abio', emoji:'👤',
+    gen:'Generation 1 — 2nd Child of Selita Mkyagawa',
+    parents:['guracha','Selita Mkyagawa'],
+    spouses:['Hannah Hadadah','Mama Agnes'],
+    children:['phillip_abio_hiribae','catherine_hiribae','patrick_hiribae','selina_hiribae','evaline_hiribae','moses_hiribae','johnson_hiribae','harrison_hiribae','philip_hiribae_ii'],
+    branch:'Wife IV'
+  },
+  moses_galana_abio: {
+    id:'moses_galana_abio', name:'Moses Galana Abio', emoji:'👤',
+    gen:'Generation 1 — 3rd Child of Selita Mkyagawa',
+    parents:['guracha','Selita Mkyagawa'],
+    spouses:['Koshi Rhova','Mama Dishani Nangorombi','Mama Yunia Seth'],
+    children_text:['Innocent Mkyagawa Galana','Gertrude Haduyo Galana','Phillip Abio Galana','Selina Mkyagawa Galana †','Patrick Gafo Galana','Naomi Hadia Galana','Selita Mkyagawa Galana','Selina Haduyo Galana †','Naomi Hadia Galana','Rose Hawadesa Galana','Janet Hadima Galana'],
+    notes:'Three wives: Koshi Rhova (2 children), Mama Dishani Nangorombi (4 children), Mama Yunia Seth (5 children).',
+    branch:'Wife IV'
+  },
+  phillip_jillo: {
+    id:'phillip_jillo', name:'Phillip Jillo Abio', emoji:'👤',
+    gen:'Generation 1 — 4th Child of Selita Mkyagawa',
+    parents:['guracha','Selita Mkyagawa'],
+    spouses:['Late Mama Doris','Mama Leah'],
+    children_text:['Phillip Abio Jillo','David Gafo Jillo','Selita Mkyagawa Jillo'],
+    branch:'Wife IV'
+  },
+  harrison_morowa: {
+    id:'harrison_morowa', name:'Harrison Phillip Morowa Abio', emoji:'👤',
+    gen:'Generation 1 — 7th Child of Selita Mkyagawa',
+    parents:['guracha','Selita Mkyagawa'],
+    spouses:['Margaret Koshi Moses','Mwanahadie Bwanakher','Beatrice Kathina','Mary Mwanzi','Fatuma Ali','Hawa Oneko'],
+    children_text:['Joseph Abio Morowa','Phillip Abio Morowa','Mwanahamisi Kombo','Sera Mwikali †','Jesca Mwende','James Oloo','Millicent Ndinda','Mathew Boyi (Gafo)','Brian Gafo Morowa †','Teresiah Mkyagawa Morowa','Nasir Mohamed','Nasra Mohamed','Brighton Abio Morowa'],
+    branch:'Wife IV'
+  },
+  patrick_gafo: {
+    id:'patrick_gafo', name:'Patrick Gafo Abio', emoji:'👤',
+    gen:'Generation 1 — 8th Child of Selita Mkyagawa',
+    parents:['guracha','Selita Mkyagawa'], spouses:['Rahel Hadiribo'],
+    children_text:['Mkyagawa Gafo †(1yr 3mo)','Mkyagawa Gafo †(2 days)','Phillip Abio Gafo','Irene Mkyagawa Gafo','Alvine Hadhuyo Gafo'],
+    notes:'Lost two children in infancy. Despite these painful losses, this branch remains an important part of the family.',
+    branch:'Wife IV'
+  },
+  naomi_hadia: {
+    id:'naomi_hadia', name:'Naomi Hadia Abio', emoji:'👩', deceased:true,
+    gen:'Generation 1 — 9th Child of Selita Mkyagawa',
+    parents:['guracha','Selita Mkyagawa'], spouses:[],
+    children_text:['Innocent Subira'],
+    notes:'Passed away in adulthood shortly after childbirth. Her son Innocent Subira married Ruth Atieno; they have one daughter: Hephsiba Hadia Subira.',
+    branch:'Wife IV'
+  },
+  dhadho_abio: {
+    id:'dhadho_abio', name:'Dhadho Abio', emoji:'👤',
+    gen:'Generation 1 — 10th Child of Selita Mkyagawa',
+    parents:['guracha','Selita Mkyagawa'],
+    spouses:['Gumato Bulle','Margaret Kamene','Mama Nuru †'],
+    children_text:['Esther Malika Dhadho','Ronald Abio Dhadho','Richard Gafo Dhadho','Raymond Alikano Dhadho','Emily Mbaika Dhadho','Abio Dhadho Jnr'],
+    branch:'Wife IV'
+  },
+
+  /* ── REBECCA'S CHILDREN ── */
+  shirikisho: { id:'shirikisho', name:'Shirikisho', emoji:'👩', deceased:true,
+    gen:'Generation 2', parents:['rebecca'], spouses:['Omar'],
+    children_text:['Riziki','Mohamed †'], branch:'Wife IV' },
+  hawadesa_r: { id:'hawadesa_r', name:'Hawadesa', emoji:'👩',
+    gen:'Generation 2', parents:['rebecca'], spouses:['Siri'],
+    children_text:['Zawadi','Winnie','Bonaya (Bonnie)','Greyson (Noah)','Jacklin','Gerera'], branch:'Wife IV' },
+  hiribae_r: { id:'hiribae_r', name:'Hiribae', emoji:'👤',
+    gen:'Generation 2', parents:['rebecca'],
+    spouses:['Janet','Mwanajuma','Stella Galana'],
+    children_text:['Rhova (Lugu) — with Janet','Hawadesa — with Janet','Salim — with Mwanajuma','Rhova Jnr — with Stella','Bajebi — with Stella'], branch:'Wife IV' },
+  hadia_r: { id:'hadia_r', name:'Hadia', emoji:'👩',
+    gen:'Generation 2', parents:['rebecca'], spouses:['Isack Kamoyo'],
+    children_text:['Mutuma','Jennifer','Kaendo (Rebecca)','Ann'], branch:'Wife IV' },
+  jillo_r: { id:'jillo_r', name:'Jillo', emoji:'👤', deceased:true,
+    gen:'Generation 2', parents:['rebecca'], spouses:[],
+    notes:'Deceased/Missing. Did not have offspring.', branch:'Wife IV' },
+  bajebi_r: { id:'bajebi_r', name:'Bajebi', emoji:'👤',
+    gen:'Generation 2', parents:['rebecca'],
+    children_text:['Haduyo — with Nkandugu'], branch:'Wife IV' },
+  babo_r: { id:'babo_r', name:'Babo', emoji:'👤',
+    gen:'Generation 2', parents:['rebecca'], spouses:['Florence'],
+    children_text:['Smith Rhova Babo — with Florence','Hazel Hiribae Babo — with Florence','Smith Rhova Babo II — separate relationship'], branch:'Wife IV' },
+  hakofa_r: { id:'hakofa_r', name:'Hakofa', emoji:'👩',
+    gen:'Generation 2', parents:['rebecca'], spouses:['Wario Ntusa (Hewani)'],
+    children_text:['Amuma','Sonia','Hawayu','Elina','Obed','Haduyo','Rhova','Swabra — separate relationship'], branch:'Wife IV' },
+  habokea_r: { id:'habokea_r', name:'Habokea', emoji:'👩',
+    gen:'Generation 2', parents:['rebecca'], spouses:[],
+    notes:'Margaret was briefly married to Peter Manya. Children: Christian (with Peter Manya), Alain (separate relationship).', branch:'Wife IV' },
+
+  /* ── SULEIMAN'S CHILDREN ── */
+  phillip_abio_hiribae: { id:'phillip_abio_hiribae', name:'Phillip Abio Hiribae', emoji:'👤',
+    gen:'Generation 2', parents:['suleiman'], spouses:['Rita Nalua Makorani'],
+    children_text:['Mitchell Ghamaharo Abio','Kelvin Baraka Abio','Damaris Haddadah Abio','Darius Hiribae Abio'], branch:'Wife IV' },
+  catherine_hiribae: { id:'catherine_hiribae', name:'Catherine Mkyagawa Hiribae', emoji:'👩',
+    gen:'Generation 2', parents:['suleiman'], spouses:['Ibrahim'],
+    children_text:['Wilfred Masuluti Ibrahim','Simon Naghea Ibrahim','Mathew Galicha Ibrahim'], branch:'Wife IV' },
+  patrick_hiribae: { id:'patrick_hiribae', name:'Patrick Gafo Hiribae', emoji:'👤',
+    gen:'Generation 2', parents:['suleiman'], spouses:['Irene Dhahabu Sulubu'],
+    children_text:['Kelvin Hiribae Gafo','Hannah Haddadah'], branch:'Wife IV' },
+  selina_hiribae: { id:'selina_hiribae', name:'Selina Haduyo Hiribae', emoji:'👩',
+    gen:'Generation 2', parents:['suleiman'], spouses:['Amani Ddaddah Tarshish'],
+    children_text:['Anthony Bonaya Ddaddah (Bravo)','Earnest Shari Ddaddah'], branch:'Wife IV' },
+  evaline_hiribae: { id:'evaline_hiribae', name:'Evaline Hadia Hiribae', emoji:'👩',
+    gen:'Generation 2', parents:['suleiman'], spouses:['David Muendo'],
+    children_text:['Patricia Haddadah Muendo','Franklin Musimi Muendo','John Malelu Muendo'], branch:'Wife IV' },
+  moses_hiribae: { id:'moses_hiribae', name:'Moses Galana Hiribae', emoji:'👤',
+    gen:'Generation 2', parents:['suleiman'], spouses:['Patience Hadia Malibe','Terry Chege'],
+    children_text:['Marcel Hiribae — w/ Patience','Adriel Abio — w/ Patience','Gael Gafo — w/ Patience','Neo Hiribae Galana — w/ Terry','Griffin — w/ Terry'], branch:'Wife IV' },
+  johnson_hiribae: { id:'johnson_hiribae', name:'Johnson Jilo Hiribae', emoji:'👤',
+    gen:'Generation 2', parents:['suleiman'], spouses:['Florence Malika Kayuke'],
+    children_text:['Jayden Hiribae Jilo','Ethan Abio (Guracha) Jillo'], branch:'Wife IV' },
+  harrison_hiribae: { id:'harrison_hiribae', name:'Harrison Morowa Hiribae', emoji:'👤',
+    gen:'Generation 2', parents:['suleiman'], spouses:['Josephine Mkeandera'],
+    children_text:['Evan Hiribae Morowa','Ian Abio (Guracha) Morowa'], branch:'Wife IV' },
+  philip_hiribae_ii: { id:'philip_hiribae_ii', name:'Philip Abio Hiribae II', emoji:'👤',
+    gen:'Generation 2', parents:['suleiman'], spouses:[],
+    notes:'Not yet married.', branch:'Wife IV' },
+
+  /* ── RAISED BY GURACHA ── */
+  gafo_jillo: {
+    id:'gafo_jillo', name:'Gafo Jillo (Nehemia)', emoji:'👤',
+    gen:'Raised by Guracha',
+    parents:['Jillo Gafo (sibling of Guracha)'], spouses:['Margret Makosa Abio'],
+    children_text:['Josephine Haoddo Gafo','Elvis Jillo Gafo †','Alice Haduyo Gafo (1st) †','Joyce Hawadesa Gafo','Eric Abio Gafo','Naomi Haddia Gafo','Alice Haduyo Gafo (2nd)','Janet Haddima Gafo','Mercy Guyato Gafo †'],
+    notes:'Son of Jillo Gafo, a sibling of Guracha. His first daughter Alice Haduyo died at three months; a later daughter was given the same name in her memory.',
+    branch:'Raised'
+  },
+  haduyo_galana_rebecca: {
+    id:'haduyo_galana_rebecca', name:'Haduyo Galana (Rebecca)', emoji:'👩',
+    gen:'Raised by Guracha',
+    parents:['Galana Gafo (sibling of Guracha)'], spouses:['Yako Simon'],
+    children_text:['Moroa Yako','Malibe Yako','Abihael Yako','Lidyia Yako','Galana Yako','Gafo Yako','Aladdin Yako','Margret Makosa Yako'],
+    notes:'Daughter of Galana Gafo, another sibling of Guracha. 8 children, 21 grandchildren.',
+    branch:'Raised'
+  },
+};
+
+/* quick full-text search index: name + all children names */
+function buildIndex() {
+  return Object.values(PEOPLE).map(p => {
+    const childNames = [
+      ...(p.children||[]).map(id => PEOPLE[id]?.name||id),
+      ...(p.children_text||[])
+    ].join(' ');
+    const spouseNames = (p.spouses||[]).join(' ');
+    return {
+      id: p.id,
+      text: [p.name, p.gen, p.branch, childNames, spouseNames].join(' ').toLowerCase()
+    };
+  });
+}
+const INDEX = buildIndex();
+
+/* ── NAV TABS ── */
+function showTab(id, btn) {
+  document.querySelectorAll('.tree-section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('#tabs .tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('sec-'+id).classList.add('active');
+  btn.classList.add('active');
+}
+function showVTab(id, btn) {
+  document.querySelectorAll('.vtab').forEach(t => t.style.display='none');
+  document.querySelectorAll('#sec-vittukuu .tabs .tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('vtab-'+id).style.display='block';
+  btn.classList.add('active');
+}
+function fgToggle(hdr) {
+  hdr.classList.toggle('open');
+  hdr.nextElementSibling.classList.toggle('open');
+}
+
+/* ── BUILD WIFE IV GRID ── */
+const selitaIds = ['rebecca','suleiman','moses_galana_abio','phillip_jillo',null,null,'harrison_morowa','patrick_gafo','naomi_hadia','dhadho_abio'];
+const selitaLabels = ['1st','2nd','3rd','4th','5th †','6th †','7th','8th','9th †','10th'];
+function buildSelitaGrid() {
+  const g = document.getElementById('selita-grid');
+  selitaIds.forEach((id, i) => {
+    const p = id ? PEOPLE[id] : null;
+    const tile = document.createElement('div');
+    tile.className = 'person-tile' + (!p ? ' deceased' : (p.deceased ? ' deceased' : ''));
+    if (p) { tile.onclick = () => openProfile(id); tile.setAttribute('tabindex','0'); tile.onkeydown = e => e.key==='Enter' && openProfile(id); }
+    tile.innerHTML = `
+      <div class="pt-avatar">${p ? p.emoji : '👤'}</div>
+      <div class="pt-name">${p ? p.name : (i===4 ? 'Gafo Abio (deceased in infancy)' : 'Hadia Abio (deceased in infancy)')}</div>
+      <div class="pt-role">${selitaLabels[i]} child of Selita Mkyagawa</div>
+      ${p?.deceased ? '<span class="pt-tag dec">Deceased</span>' : (p ? '<span class="pt-tag">View profile</span>' : '')}
+    `;
+    g.appendChild(tile);
+  });
+}
+
+/* ── BUILD RAISED GRID ── */
+function buildRaisedGrid() {
+  const g = document.getElementById('raised-grid');
+  ['gafo_jillo','haduyo_galana_rebecca'].forEach(id => {
+    const p = PEOPLE[id];
+    const tile = document.createElement('div');
+    tile.className = 'person-tile';
+    tile.onclick = () => openProfile(id);
+    tile.setAttribute('tabindex','0');
+    tile.onkeydown = e => e.key==='Enter' && openProfile(id);
+    tile.innerHTML = `
+      <div class="pt-avatar">${p.emoji}</div>
+      <div class="pt-name">${p.name}</div>
+      <div class="pt-role">${p.gen}</div>
+      <span class="pt-tag">View profile</span>
+    `;
+    g.appendChild(tile);
+  });
+}
+
+/* ── BUILD VITTUKUU TABS ── */
+function buildVittukuu() {
+  const sections = {
+    vm: {
+      title:'Via Mama Maita (Gafo Abio × Sarah)',
+      items: ['abio_philip_gafo','haduyo_selina_gafo','hadia_mary_gafo','yesse_maddawa','rose_hawadesa_gafo','subira_hadima','moses_galana_gafo','hiribae_suleiman_gafo']
+    },
+    vr: {
+      title:'Via Rebecca Haduyo Abio (1st child of Selita)',
+      items: ['shirikisho','hawadesa_r','hiribae_r','hadia_r','jillo_r','bajebi_r','babo_r','hakofa_r','habokea_r']
+    },
+    vs: {
+      title:'Via Suleiman Hiribae Abio (2nd child of Selita)',
+      items: ['phillip_abio_hiribae','catherine_hiribae','patrick_hiribae','selina_hiribae','evaline_hiribae','moses_hiribae','johnson_hiribae','harrison_hiribae','philip_hiribae_ii']
+    },
+    vmg: {
+      title:'Via Moses Galana Abio (3rd child of Selita)',
+      html: `<div class="family-group"><div class="fg-header open" onclick="fgToggle(this)"><h3>Moses Galana Abio — Three Wives, 11 Children</h3><span class="fg-chevron">▾</span></div><div class="fg-body open">
+        <div class="wife-strip"><div class="wife-label">First Wife — Koshi Rhova</div><ul class="children-list"><li><span class="cl-num">1.</span>Innocent Mkyagawa Galana → child: Purity Kassim (Halima)</li><li><span class="cl-num">2.</span>Gertrude Haduyo Galana → 6 children: Eunice, Penina, Kerna, Patience, Balesa, Kezia Francis</li></ul></div>
+        <div class="wife-strip"><div class="wife-label">Second Wife — Mama Dishani Nangorombi</div><ul class="children-list"><li class="dec"><span class="cl-num">1.</span>Selina Mkyagawa Galana — no children</li><li><span class="cl-num">2.</span>Abio Galana → Moses Abio, Neema Abio</li><li><span class="cl-num">3.</span>Gafo Galana → Sandra Dishani Gafo, Moses Galana Gafo</li><li><span class="cl-num">4.</span>Hadiya Galana → 6 children (Ibrahim, Alvine, Moses Goodluck, Aline, Filikita, Sylvester)</li></ul></div>
+        <div class="wife-strip"><div class="wife-label">Third Wife — Mama Yunia Seth</div><ul class="children-list"><li><span class="cl-num">1.</span>Mkyagawa Galana (Mwana) → Asha Habona Jilo, Hassan Baraya Jilo, Melvin Tunda Jilo</li><li class="dec"><span class="cl-num">2.</span>Selina Haduyo Galana — no children</li><li><span class="cl-num">3.</span>Hadia Galana — no children yet</li><li><span class="cl-num">4.</span>Hawadesa Galana → Ruth Nawana Buya</li><li><span class="cl-num">5.</span>Hadima Galana — no children yet</li></ul></div>
+      </div></div>`
+    },
+    vp: {
+      title:'Via Phillip Jillo Abio (4th child of Selita)',
+      html: `<div class="family-group"><div class="fg-header open" onclick="fgToggle(this)"><h3>Phillip Jillo Abio — 3 Children</h3><span class="fg-chevron">▾</span></div><div class="fg-body open"><ul class="children-list"><li><span class="cl-num">1.</span>Phillip Abio Jillo × Rita Mupa Jawa — not yet blessed with children</li><li><span class="cl-num">2.</span>David Gafo Jillo — sired Kingston Jillo Gafo with Constance Halako Asaph; fostered stepchild Veronica</li><li><span class="cl-num">3.</span>Selita Mkyagawa Jillo × Buya Awadhi → Bajila Salim</li></ul></div></div>`
+    },
+    vh: {
+      title:'Via Harrison Phillip Morowa Abio (7th child of Selita)',
+      html: `<div class="family-group"><div class="fg-header open" onclick="fgToggle(this)"><h3>Harrison Phillip Morowa Abio — Children</h3><span class="fg-chevron">▾</span></div><div class="fg-body open">
+        <div class="wife-strip"><div class="wife-label">With Margaret Koshi Moses</div><ul class="children-list"><li>Joseph Abio Morowa × Hashora Komora → Margaret Koshi Abio, Harrison Morowa Abio, Venus Mkyagawa Abio, Brainy Gafo Abio; also Margaret Koshi Abio Jnr (with Sharuti Gwiyo)</li></ul></div>
+        <div class="wife-strip"><div class="wife-label">With Mwanahadie Bwanakher</div><ul class="children-list"><li>Phillip Abio Morowa × Mbeyu Chiwai → Harrison Morowa Abio, William Gafo Abio, Maryane Nabuo Abio, Jael Selita Abio †</li><li>Mwanahamisi Kombo → Naima Salim, Aisha Mtua, Samira Imani</li></ul></div>
+        <div class="wife-strip"><div class="wife-label">With Beatrice Kathina (parented)</div><ul class="children-list"><li>Sera Mwikali → Bahati; 1 deceased</li><li>Jesca Mwende → Judy Fatuma, Francis Adebayor, Jesmine Aisha</li><li>James Oloo → Oloo Junior</li><li>Millicent Ndinda → Maryline, Mutuati, Victor, Beatrice</li><li>Mathew Boyi (Gafo) → Beatrice Kathina, Cecilia Mwikali</li></ul></div>
+        <div class="wife-strip"><div class="wife-label">Other Families</div><ul class="children-list"><li>Teresiah Mkyagawa Morowa (with Mary Mwanzi) — not yet blessed with children</li><li>Nasir & Nasra Mohamed (with Fatuma Ali) — still young</li><li>Brighton Abio Morowa (with Hawa Oneko) — still young</li></ul></div>
+      </div></div>`
+    },
+    vpg: {
+      title:'Via Patrick Gafo Abio (8th child of Selita) × Rahel Hadiribo',
+      html: `<div class="family-group"><div class="fg-header open" onclick="fgToggle(this)"><h3>Patrick Gafo Abio × Rahel Hadiribo</h3><span class="fg-chevron">▾</span></div><div class="fg-body open"><ul class="children-list"><li><span class="cl-num">1.</span>Phillip Abio Gafo × Letah Macharia → Pryce Gafo Abio</li><li><span class="cl-num">2.</span>Irene Mkyagawa Gafo × Peter Mubia → Zeal Wanjiku Kimani</li><li><span class="cl-num">3.</span>Alvine Haduyo Gafo → Deontay Gafo Lesian</li></ul><div class="note-box">Also: Innocent Subira (son of Naomi Hadia Abio, 9th child of Selita) × Ruth Atieno → Hephsiba Hadia Subira</div></div></div>`
+    },
+    vd: {
+      title:'Via Dhadho Abio (10th child of Selita)',
+      html: `<div class="family-group"><div class="fg-header open" onclick="fgToggle(this)"><h3>Dhadho Abio — 6 Children</h3><span class="fg-chevron">▾</span></div><div class="fg-body open">
+        <ul class="children-list">
+          <li><span class="cl-num">1.</span>Esther Malika Dhadho × Hussein Bonaya → Mwanajuma, Jillo, Aisha, Asma Bonaya</li>
+          <li><span class="cl-num">2.</span>Ronald Abio Dhadho × Zauja Hakofa → Amina Gumato Abio, Ibrahim Dhadho Abio, Malika Abio</li>
+          <li><span class="cl-num">3.</span>Richard Gafo Dhadho × Mary Malika Dhadho → Alex Gafo Dhadho, Stacy Gafo Gumato, Alan Gafo Abio</li>
+          <li><span class="cl-num">4.</span>Raymond Alikano Dhadho — not yet married</li>
+          <li><span class="cl-num">5.</span>Emily Mbaika Dhadho → Emisam Wambua</li>
+          <li><span class="cl-num">6.</span>Abio Dhadho Jnr — not yet married</li>
+        </ul>
+      </div></div>`
+    }
+  };
+
+  Object.entries(sections).forEach(([key, sec]) => {
+    const el = document.getElementById('vtab-'+key);
+    if (sec.html) { el.innerHTML = `<h3 style="font-family:var(--font-display);color:var(--burg);margin-bottom:.8rem;font-size:1rem">${sec.title}</h3>${sec.html}`; return; }
+    let html = `<h3 style="font-family:var(--font-display);color:var(--burg);margin-bottom:.8rem;font-size:1rem">${sec.title}</h3><div class="persons-grid">`;
+    sec.items.forEach(id => {
+      const p = PEOPLE[id];
+      if (!p) return;
+      const childList = [
+        ...(p.children||[]).map(cid => PEOPLE[cid]?.name||cid),
+        ...(p.children_text||[])
+      ].slice(0,3).join(', ') + (([...(p.children||[]),...(p.children_text||[])].length > 3) ? '…' : '');
+      html += `<div class="person-tile${p.deceased?' deceased':''}" onclick="openProfile('${id}')" tabindex="0" onkeydown="event.key==='Enter'&&openProfile('${id}')">
+        <div class="pt-avatar">${p.emoji}</div>
+        <div class="pt-name">${p.name}</div>
+        <div class="pt-role">${p.spouses?.length ? '× '+p.spouses[0] : (p.parents?.map(pid=>PEOPLE[pid]?.name||pid).join(' & ')||'')}</div>
+        ${childList ? `<div class="pt-role" style="margin-top:.2rem">Children: ${childList}</div>` : ''}
+        ${p.deceased ? '<span class="pt-tag dec">Deceased</span>' : '<span class="pt-tag">View profile</span>'}
+      </div>`;
+    });
+    html += '</div>';
+    el.innerHTML = html;
+  });
+}
+
+/* ── PROFILE MODAL ── */
+function openProfile(id) {
+  const p = PEOPLE[id];
+  if (!p) return;
+  closeResults();
+
+  document.getElementById('pm-name').textContent = p.name;
+  document.getElementById('pm-gen').textContent = p.gen || '';
+  document.getElementById('pm-status').textContent = p.status || (p.deceased ? '† Deceased' : '');
+
+  const photo = document.getElementById('pm-photo');
+  photo.innerHTML = p.emoji;
+
+  let body = '';
+
+  // Parents
+  const parentNames = (p.parents||[]).map(pid => {
+    const pp = PEOPLE[pid];
+    return pp ? `<a onclick="openProfile('${pid}')" tabindex="0">${pp.name}</a>` : pid;
+  });
+  if (parentNames.length) {
+    body += `<div class="profile-section"><div class="psec-label">Parents</div><div class="psec-value">${parentNames.join(' &amp; ')}</div></div>`;
+  }
+
+  // Spouses
+  if (p.spouses?.length) {
+    body += `<div class="profile-section"><div class="psec-label">Married to</div><div class="psec-value">${p.spouses.join('; ')}</div></div>`;
+  }
+
+  // Children with links
+  const namedChildren = (p.children||[]).map(cid => {
+    const ch = PEOPLE[cid];
+    return ch ? `<a class="chip${ch.deceased?' dec':''}" onclick="openProfile('${cid}')" tabindex="0">${ch.name}${ch.deceased?' †':''}</a>` : '';
+  }).filter(Boolean);
+  const textChildren = (p.children_text||[]).map(n => `<span class="chip">${n}</span>`);
+  const allChildren = [...namedChildren, ...textChildren];
+  if (allChildren.length) {
+    body += `<div class="profile-section"><div class="psec-label">Children (${allChildren.length})</div><div class="family-chips">${allChildren.join('')}</div></div>`;
+  } else if (!p.notes?.includes('not yet')) {
+    body += `<div class="profile-section"><div class="psec-label">Children</div><div class="psec-value" style="font-style:italic;color:var(--ink-soft)">No children on record.</div></div>`;
+  }
+
+  // Siblings
+  if (p.parents?.length) {
+    const parentId = typeof p.parents[0] === 'string' && PEOPLE[p.parents[0]] ? p.parents[0] : null;
+    if (parentId) {
+      const siblings = (PEOPLE[parentId].children||[]).filter(sid => sid !== id);
+      if (siblings.length) {
+        const sibChips = siblings.map(sid => {
+          const s = PEOPLE[sid];
+          return s ? `<a class="chip" onclick="openProfile('${sid}')" tabindex="0">${s.name}</a>` : '';
+        }).filter(Boolean);
+        if (sibChips.length) {
+          body += `<div class="profile-section"><div class="psec-label">Siblings</div><div class="family-chips">${sibChips.join('')}</div></div>`;
+        }
+      }
+    }
+  }
+
+  // Branch
+  if (p.branch) {
+    body += `<div class="profile-section"><div class="psec-label">Family Branch</div><div class="psec-value">${p.branch}</div></div>`;
+  }
+
+  // Notes
+  if (p.notes) {
+    body += `<div class="profile-section"><div class="note-box">${p.notes}</div></div>`;
+  }
+
+  document.getElementById('pm-body').innerHTML = body;
+  const modal = document.getElementById('profile-modal');
+  modal.classList.add('open');
+  modal.focus();
+  document.body.style.overflow = 'hidden';
+}
+
+function closeProfile() {
+  document.getElementById('profile-modal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+/* ── SEARCH ── */
+document.getElementById('q').addEventListener('keydown', e => {
+  if (e.key === 'Enter') runSearch();
+  if (e.key === 'Escape') closeResults();
+});
+
+function runSearch() {
+  const raw = document.getElementById('q').value.trim();
+  if (raw.length < 2) return;
+  const q = raw.toLowerCase();
+  const hits = INDEX.filter(r => r.text.includes(q))
+    .map(r => PEOPLE[r.id])
+    .filter(Boolean);
+
+  const panel = document.getElementById('results-panel');
+  const list  = document.getElementById('results-list');
+  document.getElementById('results-title').textContent = `${hits.length} result${hits.length!==1?'s':''} for "${raw}"`;
+
+  if (!hits.length) {
+    list.innerHTML = `<div class="no-results">No family members found for "<em>${raw}</em>"</div>`;
+  } else {
+    const re = new RegExp(raw.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'), 'gi');
+    list.innerHTML = hits.map(p => `
+      <div class="result-item" onclick="openProfile('${p.id}')" tabindex="0" onkeydown="event.key==='Enter'&&openProfile('${p.id}')">
+        <div class="result-avatar">${p.emoji}</div>
+        <div class="result-info">
+          <div class="result-name">${p.name.replace(re, m => `<mark>${m}</mark>`)}</div>
+          <div class="result-meta">${p.gen||''} ${p.branch ? '· '+p.branch : ''}</div>
+        </div>
+      </div>
+    `).join('');
+  }
+  panel.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeResults() {
+  document.getElementById('results-panel').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+document.getElementById('results-panel').addEventListener('click', e => {
+  if (e.target === document.getElementById('results-panel')) closeResults();
+});
+document.getElementById('profile-modal').addEventListener('click', e => {
+  if (e.target === document.getElementById('profile-modal')) closeProfile();
+});
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') { closeProfile(); closeResults(); }
+});
+
+/* ── INIT ── */
+buildSelitaGrid();
+buildRaisedGrid();
+buildVittukuu();
+</script>
